@@ -13,6 +13,10 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.2.5.RELEASE</version>
     </parent>
+    
+    <properties>
+		
+	</properties>
   
   <dependencies>
     <dependency>
@@ -35,13 +39,10 @@
     <dependency>
         <groupId>com.mangofactory</groupId>
         <artifactId>swagger-springmvc</artifactId>
-        <version>0.9.5</version>
+        <version>0.8.8</version>
     </dependency>
-    <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-swagger2</artifactId>
-        <version>2.0.3</version>
-    </dependency>
+
+ 
   </dependencies>
   
   
