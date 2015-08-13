@@ -11,14 +11,14 @@ package com.asters.billingengine.repo;
  * @author premkrishna
  */
 import java.util.List;
-import com.asters.billingengine.model.Person;
+import com.asters.billingengine.model.User;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface PersonRepo extends PagingAndSortingRepository<Person, Long> {
+public interface UserRepo extends PagingAndSortingRepository<User, Long> {
 
-	List<Person> findByLastName(@Param("name") String name);
+	List<User> findByName(@Param("name") String name);
+        List<User> findById(@Param("id") long id);
 
 }

@@ -6,16 +6,17 @@
 
 package com.asters.billingengine.controller;
 
-import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.asters.billingengine.model.Child;
+import com.asters.billingengine.repo.ChildRepo;
+import com.asters.billingengine.repo.ParentRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -28,19 +29,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class ChildCtrl {
 
+    @Autowired
+    ChildRepo childRepo;
+    
+    @Autowired
+    ParentRepo parentRepo;
     
     @RequestMapping(value="/api/child", method = RequestMethod.GET)
-    @ApiOperation(
-            httpMethod = "GET", 
-            value = "Get Child",
-            notes = "API to get child details",
-            response = String.class)
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Pet not found") })
-
-    public String getChild() {
+    @ApiOperation(httpMethod = "GET", value = "Get All Children", response = Child.class)
+    public Iterable<Child> getAll() {
         System.out.println("GSM");
-        return "A Child";
+        return childRepo.findAll();
+    }
+    
+    @RequestMapping(value="/api/child/{id}", method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET", value = "Get One Child", response = Child.class)
+    public Iterable<Child> getOne(@PathVariable long id) {
+        System.out.println("GSM");
+        return childRepo.findById(id);
+    }
+    
+    @RequestMapping(value="/api/child", method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST", value = "Save Child", response = Child.class)
+    public Child post(@RequestBody Child child) {
+        System.out.println("GSM");
+        return childRepo.save(child);
     }
 }
